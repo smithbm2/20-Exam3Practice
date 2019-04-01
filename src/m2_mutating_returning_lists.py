@@ -88,22 +88,23 @@ def run_test_doubler():
     arg3 = []
     arg4 = [-.25, 20, 200, 5.7, 1, -1, -3, 3]
     correct_arg3_after = []
-    correct_arg4_after = [-.5, 40, 400, 11.4, 2, -2, -6, 6]
-    expected = [10, 0, 16]
+    correct_arg4_after = [-.25, 20, 200, 5.7, 1, -1, -3, 3]
+    expected = [-.5, 40, 400, 11.4, 2, -2, -6, 6]
 
     print()
     print('BEFORE the function call:')
-    print('  Argument 1 is:', arg3)
-    print('  Argument 2 is:', arg4)
+    print('  Argument 3 is:', arg3)
+    print('  Argument 4 is:', arg4)
 
     answer = doubler(arg3, arg4)
 
     print('AFTER the function call:')
-    print('  Argument 1 is:       ', arg3)
-    print('  Argument 1 should be:', correct_arg3_after)
-    print('  Argument 2 is:       ', arg4)
-    print('  Argument 2 should be:', correct_arg4_after)
-    print('The returned value is: ', answer)
+    print('  Argument 3 is:       ', arg3)
+    print('  Argument 3 should be:', correct_arg3_after)
+    print('  Argument 4 is:       ', arg4)
+    print('  Argument 4 should be:', correct_arg4_after)
+    print('The returned value is:       ', answer)
+    print('The returned value should be:', expected)
 
 def doubler(list1, list2):
     """
