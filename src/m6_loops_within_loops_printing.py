@@ -6,8 +6,8 @@ This problem provides practice at:
 
 Authors: David Mutchler, Vibha Alangar, Matt Boutell, Dave Fisher,
          Mark Hays, Amanda Stouder, Aaron Wilkin, their colleagues,
-         and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         and Braden Smith.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 ###############################################################################
 # Students:
@@ -89,7 +89,15 @@ def shape(r):
     #    TIME ESTIMATE:  15 minutes.
     # -------------------------------------------------------------------------
 
-
+    for k in range(r):
+        for j in range(k):
+            print('#', end='')
+        for i in range(r-k):
+            print('+', end='')
+            if i == r-k-1:
+                print('!', end='')
+        for m in range()
+        print()
 # -----------------------------------------------------------------------------
 # Calls  main  to start the ball rolling.
 # -----------------------------------------------------------------------------
