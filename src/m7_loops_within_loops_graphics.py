@@ -107,12 +107,16 @@ def hourglass(window, n, point, radius, color):
     circle = rg.Circle(point, radius)
     circle.fill_color = color
     circle.attach_to(window)
+    new_line = rg.Line(rg.Point(point.x - radius, point.y), rg.Point(point.x + radius, point.y))
+    new_line.attach_to(window)
     for k in range(1,2*(n) - 1):
         circle = rg.Circle(rg.Point(circle.center.x + (-1)**k*k* radius, circle.center.y + (-1)**k*k * radius * math.sqrt(3)), radius)
         circle.fill_color = color
         circle.attach_to(window)
+
         for j in range((k+3)//2):
             new_circle = circle
+
             if k%2 ==1:
                 new_circle = rg.Circle(rg.Point(new_circle.center.x + j*radius*2, new_circle.center.y), circle.radius)
                 new_circle.fill_color = color
@@ -125,6 +129,7 @@ def hourglass(window, n, point, radius, color):
                 new_line = rg.Line(rg.Point(point.x - radius - radius * j, point.y - j * radius * math.sqrt(3)),
                                rg.Point(point.x + radius + j * radius, point.y - j * radius * math.sqrt(3)))
                 new_line.attach_to(window)
+
             else:
                 new_line = rg.Line(rg.Point(point.x - radius - radius * j, point.y - (-j) * radius * math.sqrt(3)),
                                rg.Point(point.x + radius + j * radius, point.y - (-j) * radius * math.sqrt(3)))
@@ -191,7 +196,7 @@ def many_hourglasses(window, square, m, colors):
     each of which denotes a color that rosegraphics understands.
     """
     # -------------------------------------------------------------------------
-    # TODO: 3. Implement and test this function.
+    # DONE: 3. Implement and test this function.
     #       We provided some tests for you (above).
     # -------------------------------------------------------------------------
     ###########################################################################
@@ -207,14 +212,35 @@ def many_hourglasses(window, square, m, colors):
     #                         a correct "hourglass" function above)
     #    TIME ESTIMATE:  20 minutes (warning: this problem is challenging)
     # -------------------------------------------------------------------------
-
-    rectangle = rg.Rectangle(rg.Point(square.center.x - square.length_of_each_side/2, square.center.y - square.length_of_each_side/2), rg.Point(square.center.x + square.length_of_each_side/2, square.center.y + square.length_of_each_side/2))
-    rectangle.attach_to(window)
-    for k in range(m - 1):
-        rectangle = rg.Rectangle(rg.Point(rectangle.corner_1.x + (rectangle.corner_2.x - rectangle.corner_1.x), rectangle.corner_1.y - square.length_of_each_side/2), rg.Point(rectangle.corner_2.x + (rectangle.corner_2.x - rectangle.corner_1.x) + square.length_of_each_side, rectangle.corner_2.y + square.length_of_each_side/2))
+    import math
+    #rectangle = rg.Rectangle(rg.Point(square.center.x - square.length_of_each_side/2, square.center.y - square.length_of_each_side/2), rg.Point(square.center.x + square.length_of_each_side/2, square.center.y + square.length_of_each_side/2))
+    #rectangle.attach_to(window)
+    #for k in range(m - 1):
+    #    newrectangle = rg.Rectangle(rg.Point(rectangle.corner_1.x + k*(rectangle.corner_2.x - rectangle.corner_1.x) + k*square.length_of_each_side, rectangle.corner_1.y - k*square.length_of_each_side/2), rg.Point(rectangle.corner_2.x + (k+1)*(rectangle.corner_2.x - rectangle.corner_1.x) + k*square.length_of_each_side, rectangle.corner_2.y + k*square.length_of_each_side/2))
+    #    newrectangle.attach_to(window)
+        #hourglass(window, k + 1, rg.Point(newrectangle.get_center().x - 1.5 * square.length_of_each_side, newrectangle.get_center().y), square.length_of_each_side/2, colors[k])
+    point1 = rg.Point(square.center.x - square.length_of_each_side/2, square.center.y - square.length_of_each_side/2)
+    point2 = rg.Point(square.center.x + square.length_of_each_side/2, square.center.y + square.length_of_each_side/2)
+    print(point1, point2)
+    for k in range(m):
+        rectangle = rg.Rectangle(point1,point2)
         rectangle.attach_to(window)
-        hourglass(window, k + 1, rg.Point(rectangle.get_center().x, rectangle.get_center().y), square.length_of_each_side/2, colors[k])
-    window.render()
+        colors = colors * m
+        hourglass(window, k + 1, rg.Point(rectangle.get_center().x, square.center.y), square.length_of_each_side/2, colors[k])
+
+        a = point1
+        b = point2
+        c = b.x - a.x
+        d = c + square.length_of_each_side
+        point1.x = a.x + (c)
+        point2.x = b.x + (d)
+
+        e = math.sqrt(3)*square.length_of_each_side/2
+        f = math.sqrt(3)*square.length_of_each_side/2
+        point1.y = a.y - e
+        point2.y = b.y + f
+        window.render()
+
 
 # -----------------------------------------------------------------------------
 # Calls  main  to start the ball rolling.
